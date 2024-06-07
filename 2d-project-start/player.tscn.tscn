@@ -1,0 +1,64 @@
+[gd_scene load_steps=8 format=3 uid="uid://bh7vf0vtsuprp"]
+
+[ext_resource type="PackedScene" uid="uid://pbmyh1qru7p" path="res://characters/happy_boo/happy_boo.tscn" id="1_40re0"]
+[ext_resource type="Script" path="res://player.gd" id="1_imn76"]
+[ext_resource type="PackedScene" uid="uid://bsyg6jvlk60ko" path="res://gun.tscn" id="3_4hr20"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4iryg"]
+radius = 36.2353
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bdcox"]
+radius = 36.3456
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_osawb"]
+bg_color = Color(0.201527, 0.201527, 0.201526, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hjjtm"]
+bg_color = Color(0.563301, 0.902936, 0.465991, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="Kody_n player" type="CharacterBody2D"]
+script = ExtResource("1_imn76")
+
+[node name="HappyBoo" parent="." instance=ExtResource("1_40re0")]
+unique_name_in_owner = true
+position = Vector2(0, -1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -3)
+shape = SubResource("CircleShape2D_4iryg")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Gun" parent="." instance=ExtResource("3_4hr20")]
+position = Vector2(2, -1.00002)
+rotation = -0.048343
+
+[node name="HurtBox" type="Area2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-1, 0)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(1, 2)
+shape = SubResource("CircleShape2D_bdcox")
+debug_color = Color(0.815309, 0.344901, 0.566747, 0.42)
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+unique_name_in_owner = true
+offset_left = -139.0
+offset_top = -150.0
+offset_right = 148.0
+offset_bottom = -121.0
+theme_override_styles/background = SubResource("StyleBoxFlat_osawb")
+theme_override_styles/fill = SubResource("StyleBoxFlat_hjjtm")
+value = 100.0
+show_percentage = false
